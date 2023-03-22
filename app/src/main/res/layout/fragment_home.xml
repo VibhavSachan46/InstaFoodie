@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".activity.MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -62,19 +62,21 @@
                 android:id="@+id/random_meal_card"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_160sdp"
-
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/heading1">
 
                 <ImageView
                     android:id="@+id/image_random_meal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/accent" />
+                    android:elevation="@dimen/_24sdp"
+                    android:scaleType="centerCrop"
+                    android:background="@color/white" />
 
             </androidx.cardview.widget.CardView>
 
