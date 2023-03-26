@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.vibhav.instafoodie.Adapter.CategoriesAdapter
 import com.vibhav.instafoodie.Adapter.MostPopularAdapter
+import com.vibhav.instafoodie.activity.CategoryMealsActivity
 import com.vibhav.instafoodie.activity.MealActivity
 import com.vibhav.instafoodie.databinding.FragmentHomeBinding
 import com.vibhav.instafoodie.pojo.MealsByCategory
@@ -33,6 +34,7 @@ class HomeFragment : Fragment() {
         const val MEAL_ID = "com.vibhav.instafoodie.fragment.idMeal"
         const val MEAL_NAME = "com.vibhav.instafoodie.fragment.nameMeal"
         const val MEAL_THUMB = "com.vibhav.instafoodie.fragment.thumbMeal"
+        const val CATEGORY_NAME = "com.vibhav.instafoodie.fragment.categoryName"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,8 +71,20 @@ class HomeFragment : Fragment() {
         homeMvvm.getCategories()
         observeCategoriesLiveData()
 
+        onCategoryclick()
 
 
+
+    }
+
+    private fun onCategoryclick() {
+        categoriesAdapter.onItemClick ={category ->
+
+            val intent = Intent(activity, CategoryMealsActivity::class.java)
+            intent.putExtra(CATEGORY_NAME, category.strCategory)
+            startActivity(intent)
+
+        }
     }
 
     private fun prepareCategoriesRecyclerView() {
