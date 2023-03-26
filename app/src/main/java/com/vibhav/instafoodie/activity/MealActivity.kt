@@ -58,7 +58,7 @@ class MealActivity : AppCompatActivity() {
                 OnresponseCase()
                 val meal =t
                 binding.tvCategory.text = "Category : ${meal!!.strCategory}"
-                binding.tvArea.text = "Area : ${meal!!.strArea}"
+                binding.tvArea.text = "Country : ${meal!!.strArea}"
                 binding.tvInstructionsSteps.text = meal.strInstructions
 
                 youtubeLink = meal.strYoutube

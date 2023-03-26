@@ -10,10 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.vibhav.instafoodie.Adapter.MostPopularAdapter
 import com.vibhav.instafoodie.R
 import com.vibhav.instafoodie.activity.MealActivity
 import com.vibhav.instafoodie.databinding.FragmentHomeBinding
+import com.vibhav.instafoodie.pojo.CategoryList
+import com.vibhav.instafoodie.pojo.CategoryMeals
 import com.vibhav.instafoodie.pojo.Meal
 import com.vibhav.instafoodie.pojo.MealList
 import com.vibhav.instafoodie.retrofit.RetrofitInstance
@@ -28,6 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeMvvm:HomeviewModel
     private lateinit var randomMeal:Meal
+    private lateinit var popularItemsAdapter:MostPopularAdapter
 
     companion object{
         const val MEAL_ID = "com.vibhav.instafoodie.fragment.idMeal"
@@ -38,6 +43,8 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeMvvm = ViewModelProvider(this)[HomeviewModel::class.java]
+
+        popularItemsAdapter = MostPopularAdapter()
     }
 
     override fun onCreateView(
@@ -53,9 +60,42 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        preparePopularItemsRecyclerView()
+
         homeMvvm.getRandomMeal()
         observerRandomMeal()
         onRandomMealClick()
+
+        homeMvvm.getPopularItems()
+        observerPopularItemsLiveData()
+        onPopularItemClicked()
+
+    }
+
+    private fun onPopularItemClicked() {
+        popularItemsAdapter.onItemClick = {meal->
+            val intent = Intent(activity,MealActivity::class.java)
+            intent.putExtra(MEAL_ID, meal.idMeal)
+            intent.putExtra(MEAL_NAME, meal.strMeal)
+            intent.putExtra(MEAL_THUMB, meal.strMealThumb)
+            startActivity(intent)
+
+        }
+    }
+
+    private fun preparePopularItemsRecyclerView() {
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
+            adapter = popularItemsAdapter
+        }
+    }
+
+    private fun observerPopularItemsLiveData() {
+        homeMvvm.observedPopularItemsLiveData().observe(viewLifecycleOwner
+        ) { mealList->
+            popularItemsAdapter.setMeals(mealList = mealList as ArrayList<CategoryMeals>)
+
+        }
     }
 
     private fun onRandomMealClick(){
@@ -69,14 +109,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun observerRandomMeal() {
-        homeMvvm.observedRandomMealLiveData().observe(viewLifecycleOwner,
-        { meal ->
+        homeMvvm.observedRandomMealLiveData().observe(viewLifecycleOwner
+        ) { meal ->
             Glide.with(this@HomeFragment)
                 .load(meal!!.strMealThumb)
                 .into(binding.imageRandomMeal)
 
             this.randomMeal = meal
-        })
-
+        }
     }
 }
