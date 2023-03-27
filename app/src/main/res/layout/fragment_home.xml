@@ -73,7 +73,7 @@
 
                 <ImageView
                     android:id="@+id/image_random_meal"
-                    android:layout_width="336dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:elevation="@dimen/_24sdp"
@@ -127,6 +127,7 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
+                android:backgroundTint="#e5e7e9"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/heading_Categories">
 
