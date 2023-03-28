@@ -4,16 +4,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vibhav.instafoodie.db.MealDatabase
 import com.vibhav.instafoodie.pojo.*
 import com.vibhav.instafoodie.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeviewModel(): ViewModel() {
+class HomeviewModel(
+    private val mealDatabse: MealDatabase
+): ViewModel() {
     private var randomMealLiveData = MutableLiveData<Meal>()
     private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
     private var categoryListLiveData = MutableLiveData<List<Category>>()
+    private var favouritesMealsLiveData = mealDatabse.mealDao().getAllMeals()
     fun getRandomMeal(){
         RetrofitInstance.api.getRandoMeal().enqueue(object : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
@@ -74,5 +78,9 @@ class HomeviewModel(): ViewModel() {
 
     fun observeCategoriesLiveData():LiveData<List<Category>>{
         return categoryListLiveData
+    }
+
+    fun observeFavouritesMealsLiveData():LiveData<List<Meal>>{
+        return favouritesMealsLiveData
     }
 }

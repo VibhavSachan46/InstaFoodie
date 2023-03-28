@@ -3,7 +3,7 @@ package com.vibhav.instafoodie.pojo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName="mealInformation")
+@Entity("mealinformation")
 data class Meal(
     val dateModified: Any?,
     @PrimaryKey
@@ -58,5 +58,5 @@ data class Meal(
     val strMeasure9: String?,
     val strSource: String?,
     val strTags: String?,
-    val strYoutube: String
+    val strYoutube: String?
 )
