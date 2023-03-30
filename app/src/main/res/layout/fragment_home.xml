@@ -127,7 +127,7 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 app:cardCornerRadius="@dimen/_10sdp"
                 app:cardUseCompatPadding="true"
-                android:backgroundTint="#e5e7e9"
+                android:backgroundTint="#E5E7E9"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/heading_Categories">
 
