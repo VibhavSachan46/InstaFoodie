@@ -51,7 +51,7 @@ class MealActivity : AppCompatActivity() {
         binding.btnFav.setOnClickListener {
             mealToSave?.let {
                  mealMvvm.insertMeal(it)
-                Toast.makeText(this,"MEal Saved", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Meal Saved", Toast.LENGTH_SHORT).show()
         }
         }
 
