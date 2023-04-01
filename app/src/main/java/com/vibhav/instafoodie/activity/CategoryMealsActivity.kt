@@ -29,7 +29,7 @@ class CategoryMealsActivity : AppCompatActivity() {
         categoryMealsViewModel.getMealByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
 
         categoryMealsViewModel.observeMealsLiveData().observe(this,{mealList->
-            binding.tvCategoryCount.text = mealList.size.toString()
+            binding.tvCategoryCount.text = "Total items in this category: "+mealList.size.toString()
             categoryMealsAdapter.setMealsList(mealList)
 
         })

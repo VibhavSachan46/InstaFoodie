@@ -72,7 +72,7 @@ class FavoritesFragment : Fragment() {
     private fun prepareRecyclerView() {
         favouriteAdapter = FavouritesMealsAdapter()
         binding.rvFavourites.apply {
-            layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
+            layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
             adapter = favouriteAdapter
         }
     }

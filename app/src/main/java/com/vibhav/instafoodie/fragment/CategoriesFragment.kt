@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vibhav.instafoodie.Adapter.CategoriesAdapter
+import com.vibhav.instafoodie.Adapter.CategoryMealAdapter
 import com.vibhav.instafoodie.R
 import com.vibhav.instafoodie.activity.CategoryMealsActivity
 import com.vibhav.instafoodie.activity.MainActivity
 import com.vibhav.instafoodie.activity.MealActivity
 import com.vibhav.instafoodie.databinding.FragmentCategoriesBinding
+import com.vibhav.instafoodie.pojo.Meal
 import com.vibhav.instafoodie.viewmodel.HomeviewModel
 
 
@@ -23,6 +25,16 @@ class CategoriesFragment : Fragment() {
     private lateinit var binding:FragmentCategoriesBinding
     private lateinit var categoriesAdapter:CategoriesAdapter
     private lateinit var viewModel:HomeviewModel
+    private lateinit var categoriesMealAdapter: CategoryMealAdapter
+
+    private lateinit var randomMeal: Meal
+
+    companion object{
+        const val MEAL_ID = "com.vibhav.instafoodie.fragment.idMeal"
+        const val MEAL_NAME = "com.vibhav.instafoodie.fragment.nameMeal"
+        const val MEAL_THUMB = "com.vibhav.instafoodie.fragment.thumbMeal"
+        const val CATEGORY_NAME = "com.vibhav.instafoodie.fragment.categoryName"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +58,8 @@ class CategoriesFragment : Fragment() {
         observeCategories()
 
         onCategoryclick()
+
+//        onCategoryItemClicked()
     }
 
     private fun observeCategories() {
@@ -73,5 +87,15 @@ class CategoriesFragment : Fragment() {
 
         }
     }
+
+//    private fun onCategoryItemClicked() {
+//        categoriesAdapter.onItemClick = {meal->
+//            val intent = Intent(activity,MealActivity::class.java)
+//            intent.putExtra(HomeFragment.MEAL_ID, randomMeal.idMeal)
+//            intent.putExtra(HomeFragment.MEAL_NAME, randomMeal.strMeal)
+//            intent.putExtra(HomeFragment.MEAL_THUMB, randomMeal.strMealThumb)
+//            startActivity(intent)
+//        }
+//    }
 
 }

@@ -121,7 +121,6 @@ class HomeFragment : Fragment() {
         viewModel.observedPopularItemsLiveData().observe(viewLifecycleOwner
         ) { mealList->
             popularItemsAdapter.setMeals(mealList = mealList as ArrayList<MealsByCategory>)
-
         }
     }
 
